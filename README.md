@@ -69,7 +69,7 @@ npm start
 
 ## Authors
 
-* **游富荃(Fu Chuan Yu)**
+* **游富荃(Fu Chuan Yu)** - [Portfolio](https://luffy84217-portfolio.herokuapp.com)
 
 ## License
 
