@@ -11,3 +11,15 @@ export function $$(selector, el) {
     }
      return el.querySelectorAll(selector);
 }
+
+export function getElement(tag, id) {
+    return new Promise((resolve, reject) => {
+        const el = document.createElement(tag);
+        if (!id) {
+            el.id = '';
+        } else {
+            el.id = id;
+        }
+        resolve(el);
+    });
+}

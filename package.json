@@ -3,11 +3,19 @@
   "version": "1.0.0",
   "description": "This is a calculator built by react with Redux.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luffy84217/calculator-react-redux"
+  },
+  "engines": {
+    "node": "6.11.1",
+    "npm": "3.10.10"
+  },
   "scripts": {
     "start": "http-server ./dist",
-    "dev": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open --config webpack.dev.js",
     "watch": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack --config webpack.common.js"
   },
   "keywords": [
     "calculator",
@@ -30,7 +38,9 @@
     "html-webpack-plugin": "^2.30.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-dev-server": "^2.9.1",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "http-server": "^0.10.0",
