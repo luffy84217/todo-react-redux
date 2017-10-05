@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         vendor: [ 'react', 'react-dom', 'redux', 'react-redux' ],
-        main: './index.js'
+        main: './index.jsx'
     },
     output: {
         filename: '[name].bundle.js',
@@ -42,7 +42,9 @@ module.exports = {
             },
             {
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
+                exclude: [
+                    path.resolve(__dirname, 'node_modules')
+                ],
                 loader: 'babel-loader',
                 options: {
                     presets: [ 'es2015', 'react' ]

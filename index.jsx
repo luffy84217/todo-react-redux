@@ -26,5 +26,3 @@ getElement('div', 'root')
             console.log(store.getState())
         );
     });
-
-
