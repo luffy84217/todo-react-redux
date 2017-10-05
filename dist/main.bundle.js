@@ -321,9 +321,7 @@ function $$(selector, el) {
 function getElement(tag, id) {
     return new Promise(function (resolve, reject) {
         var el = document.createElement(tag);
-        if (!id) {
-            el.id = '';
-        } else {
+        if (id) {
             el.id = id;
         }
         resolve(el);

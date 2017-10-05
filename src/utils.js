@@ -15,9 +15,7 @@ export function $$(selector, el) {
 export function getElement(tag, id) {
     return new Promise((resolve, reject) => {
         const el = document.createElement(tag);
-        if (!id) {
-            el.id = '';
-        } else {
+        if (id) {
             el.id = id;
         }
         resolve(el);
