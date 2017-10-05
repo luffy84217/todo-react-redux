@@ -53,7 +53,36 @@ function press(key) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var app = {
+    name: 'calculator',
+    title: 'ELECTRONIC CALCULATOR',
+    config: {
+        digitsDisplayLimit: 11,
+        decimalPlaceAllowed: 5,
+        keyConfig: [[{ key: 'AC', action: 'ALL_CLEAR', class: 'system' }, { key: 'Del', action: 'DELETE', class: 'system' }, { key: '(', action: '(', class: 'operation' }, { key: ')', action: ')', class: 'operation' }], [{ key: '7', action: 7, class: 'operator' }, { key: '8', action: 8, class: 'operator' }, { key: '9', action: 9, class: 'operator' }, { key: '+', action: '+', class: 'operation' }], [{ key: '4', action: 4, class: 'operator' }, { key: '5', action: 5, class: 'operator' }, { key: '6', action: 6, class: 'operator' }, { key: '-', action: '-', class: 'operation' }], [{ key: '1', action: 1, class: 'operator' }, { key: '2', action: 2, class: 'operator' }, { key: '3', action: 3, class: 'operator' }, { key: 'x', action: '*', class: 'operation' }], [{ key: '.', action: '.', class: 'operation' }, { key: '0', action: 0 }, { key: '=', action: 'COMPUTE', class: 'system' }, { key: '÷', action: '/', class: 'operation' }]]
+    }
+};
+
+exports.default = app;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.default = entryVerify;
+
+var _app = __webpack_require__(16);
+
+var _app2 = _interopRequireDefault(_app);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function entryVerify(entry) {
 
     var operations = ['+', '-', '*', '/'];
@@ -71,11 +100,11 @@ function entryVerify(entry) {
     if (entry.indexOf('.') !== -1) {
         var arr = entry.split('.');
 
-        return arr[0] + '.' + arr[1].slice(0, 4);
+        return arr[0] + '.' + arr[1].slice(0, _app2.default.config.decimalPlaceAllowed);
     }
     // prevent display overflow
-    if (entry.length > 11) {
-        return entry.slice(0, 11);
+    if (entry.length >= _app2.default.config.digitsDisplayLimit) {
+        return entry.slice(0, _app2.default.config.digitsDisplayLimit);
     }
     // prevent no number displaying from occurring
     if (entry === '') {
@@ -111,7 +140,6 @@ function entryVerify(entry) {
 };
 
 /***/ }),
-/* 17 */,
 /* 18 */,
 /* 19 */,
 /* 20 */,
@@ -126,7 +154,8 @@ function entryVerify(entry) {
 /* 29 */,
 /* 30 */,
 /* 31 */,
-/* 32 */
+/* 32 */,
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -137,15 +166,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = combinedReducer;
 
-var _command = __webpack_require__(83);
+var _command = __webpack_require__(84);
 
 var _command2 = _interopRequireDefault(_command);
 
-var _operation = __webpack_require__(87);
+var _operation = __webpack_require__(88);
 
 var _operation2 = _interopRequireDefault(_operation);
 
-var _operator = __webpack_require__(88);
+var _operator = __webpack_require__(89);
 
 var _operator2 = _interopRequireDefault(_operator);
 
@@ -168,7 +197,6 @@ function combinedReducer() {
 }
 
 /***/ }),
-/* 33 */,
 /* 34 */,
 /* 35 */,
 /* 36 */,
@@ -209,13 +237,14 @@ function combinedReducer() {
 /* 71 */,
 /* 72 */,
 /* 73 */,
-/* 74 */
+/* 74 */,
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _reactDom = __webpack_require__(17);
+var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -227,13 +256,13 @@ var _redux = __webpack_require__(7);
 
 var _reactRedux = __webpack_require__(13);
 
-var _utils = __webpack_require__(75);
+var _utils = __webpack_require__(76);
 
-var _App = __webpack_require__(76);
+var _App = __webpack_require__(77);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _combinedReducer = __webpack_require__(32);
+var _combinedReducer = __webpack_require__(33);
 
 var _combinedReducer2 = _interopRequireDefault(_combinedReducer);
 
@@ -241,7 +270,7 @@ var _press = __webpack_require__(15);
 
 var _press2 = _interopRequireDefault(_press);
 
-__webpack_require__(89);
+__webpack_require__(90);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -263,7 +292,7 @@ var store = (0, _redux.createStore)(_combinedReducer2.default);
 });
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -302,7 +331,7 @@ function getElement(tag, id) {
 }
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -318,7 +347,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Calculator = __webpack_require__(77);
+var _Calculator = __webpack_require__(78);
 
 var _Calculator2 = _interopRequireDefault(_Calculator);
 
@@ -342,7 +371,7 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_Calculator2.default, { name: 'ELECTRONIC CALCULATOR' });
+            return _react2.default.createElement(_Calculator2.default, null);
         }
     }]);
 
@@ -353,7 +382,7 @@ exports.default = App;
 ;
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -365,7 +394,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(13);
 
-var _Calculator = __webpack_require__(78);
+var _Calculator = __webpack_require__(79);
 
 var _Calculator2 = _interopRequireDefault(_Calculator);
 
@@ -393,7 +422,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Calculator2.default);
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -409,27 +438,31 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Title = __webpack_require__(79);
+var _Title = __webpack_require__(80);
 
 var _Title2 = _interopRequireDefault(_Title);
 
-var _Panel = __webpack_require__(80);
+var _Panel = __webpack_require__(81);
 
 var _Panel2 = _interopRequireDefault(_Panel);
 
-var _Board = __webpack_require__(81);
+var _Board = __webpack_require__(82);
 
 var _Board2 = _interopRequireDefault(_Board);
 
-var _History = __webpack_require__(82);
+var _History = __webpack_require__(83);
 
 var _History2 = _interopRequireDefault(_History);
 
 var _redux = __webpack_require__(7);
 
-var _combinedReducer = __webpack_require__(32);
+var _combinedReducer = __webpack_require__(33);
 
 var _combinedReducer2 = _interopRequireDefault(_combinedReducer);
+
+var _app = __webpack_require__(16);
+
+var _app2 = _interopRequireDefault(_app);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -454,7 +487,7 @@ var Calculator = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { id: 'calculator' },
-                _react2.default.createElement(_Title2.default, { name: this.props.name }),
+                _react2.default.createElement(_Title2.default, { name: _app2.default.title }),
                 _react2.default.createElement(_Panel2.default, { value: this.props.value, history: this.props.history }),
                 _react2.default.createElement(_Board2.default, { press: this.props.press }),
                 _react2.default.createElement(_History2.default, { records: this.props.history })
@@ -469,7 +502,7 @@ exports.default = Calculator;
 ;
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -524,7 +557,7 @@ exports.default = Title;
 ;
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -592,7 +625,7 @@ exports.default = Panel;
 ;
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -611,6 +644,10 @@ var _react2 = _interopRequireDefault(_react);
 var _press = __webpack_require__(15);
 
 var _press2 = _interopRequireDefault(_press);
+
+var _app = __webpack_require__(16);
+
+var _app2 = _interopRequireDefault(_app);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -637,6 +674,26 @@ var Board = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var buttons = _app2.default.config.keyConfig.map(function (row, y) {
+                return _react2.default.createElement(
+                    'tr',
+                    { key: y },
+                    row.map(function (button, x) {
+                        return _react2.default.createElement(
+                            'td',
+                            { key: x },
+                            _react2.default.createElement(
+                                'button',
+                                { key: button.key, className: button.class, onClick: _this2.buttonHandler.bind(_this2, button.action) },
+                                button.key
+                            )
+                        );
+                    })
+                );
+            });
+
             return _react2.default.createElement(
                 'div',
                 { id: 'buttons' },
@@ -646,206 +703,7 @@ var Board = function (_React$Component) {
                     _react2.default.createElement(
                         'tbody',
                         null,
-                        _react2.default.createElement(
-                            'tr',
-                            null,
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { className: 'system', onClick: this.buttonHandler.bind(this, 'ALL_CLEAR') },
-                                    'AC'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { className: 'system', onClick: this.buttonHandler.bind(this, 'DELETE') },
-                                    'Del'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, '(') },
-                                    '('
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, ')') },
-                                    ')'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'tr',
-                            null,
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 7) },
-                                    '7'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 8) },
-                                    '8'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 9) },
-                                    '9'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, '+') },
-                                    '+'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'tr',
-                            null,
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 4) },
-                                    '4'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 5) },
-                                    '5'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 6) },
-                                    '6'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, '-') },
-                                    '-'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'tr',
-                            null,
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 1) },
-                                    '1'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 2) },
-                                    '2'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 3) },
-                                    '3'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, '*') },
-                                    'x'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'tr',
-                            null,
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, '.') },
-                                    '.'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, 0) },
-                                    '0'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { className: 'system', onClick: this.buttonHandler.bind(this, 'COMPUTE') },
-                                    '='
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                null,
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.buttonHandler.bind(this, '/') },
-                                    '\xF7'
-                                )
-                            )
-                        )
+                        buttons
                     )
                 )
             );
@@ -859,7 +717,7 @@ exports.default = Board;
 ;
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -919,7 +777,7 @@ exports.default = History;
 ;
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -930,19 +788,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = operation;
 
-var _EntryTransArray = __webpack_require__(84);
+var _EntryTransArray = __webpack_require__(85);
 
 var _EntryTransArray2 = _interopRequireDefault(_EntryTransArray);
 
-var _ShuntingYard = __webpack_require__(85);
+var _ShuntingYard = __webpack_require__(86);
 
 var _ShuntingYard2 = _interopRequireDefault(_ShuntingYard);
 
-var _ReversePolishNotation = __webpack_require__(86);
+var _ReversePolishNotation = __webpack_require__(87);
 
 var _ReversePolishNotation2 = _interopRequireDefault(_ReversePolishNotation);
 
-var _EntryVerify = __webpack_require__(16);
+var _EntryVerify = __webpack_require__(17);
 
 var _EntryVerify2 = _interopRequireDefault(_EntryVerify);
 
@@ -964,7 +822,7 @@ function operation(state, action) {
 }
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -983,7 +841,7 @@ function entryTransArray(entry) {
 };
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1032,7 +890,7 @@ function ShuntingYard(inputArr) {
 }
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1069,7 +927,7 @@ function getAnsByRPN(inputArr) {
 }
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1080,7 +938,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = operation;
 
-var _EntryVerify = __webpack_require__(16);
+var _EntryVerify = __webpack_require__(17);
 
 var _EntryVerify2 = _interopRequireDefault(_EntryVerify);
 
@@ -1137,7 +995,7 @@ function operation(state, action) {
 }
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1148,7 +1006,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = operator;
 
-var _EntryVerify = __webpack_require__(16);
+var _EntryVerify = __webpack_require__(17);
 
 var _EntryVerify2 = _interopRequireDefault(_EntryVerify);
 
@@ -1161,13 +1019,13 @@ function operator(state, action) {
 }
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(90);
+var content = __webpack_require__(91);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1175,7 +1033,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(94)(content, options);
+var update = __webpack_require__(95)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1192,21 +1050,21 @@ if(false) {
 }
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(91)(undefined);
+exports = module.exports = __webpack_require__(92)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "@font-face{font-family:Orbitron;src:url(" + __webpack_require__(92) + ")}@font-face{font-family:Josefin Sans;src:url(" + __webpack_require__(93) + ")}*{box-sizing:border-box;padding:0;border:0;margin:0}ol,ol li,ul,ul li{margin-left:0;padding-left:0}ol,ul{margin-left:2em}body{font-family:Orbitron,sans-serif;background-color:#333}#calculator{width:360px;margin:64px auto 0}#title{padding-top:8px;padding-bottom:8px;margin-bottom:16px;color:#2abcef;text-align:center;text-shadow:1px 1px 1px rgba(0,0,0,.5)}#entrybox{width:336px;height:72px;border-top:2px solid #2abcef;margin:0 auto;background-color:#444;text-align:right}#entry{font-size:36px;color:#f7f7f7}#ans,#entry{margin-right:8px}#history{font-size:9px;color:#8b8b7b}#buttons{width:360px;margin:0 auto}table{border-collapse:collapse}table,td,th{border:12px solid transparent}td{width:90px;height:55px}button{font-family:Orbitron,sans-serif;width:100%;height:100%;border-bottom:#444;color:#f7f7f7;font-size:16px;font-weight:700;background-color:#555;outline:none;cursor:pointer;box-shadow:1px 1px 2px 1px rgba(0,0,0,.2)}button:active{opacity:.7;box-shadow:none;transform:translateY(1px)}button.system{background-color:#2abcef}li.record{width:300px;padding:16px;border-radius:16px;margin-top:16px;background-color:#444;color:#f7f7f7;text-align:right;box-shadow:2px 2px 2px 2px rgba(0,0,0,.2)}", ""]);
+exports.push([module.i, "@font-face{font-family:Orbitron;src:url(" + __webpack_require__(93) + ")}@font-face{font-family:Josefin Sans;src:url(" + __webpack_require__(94) + ")}*{box-sizing:border-box;padding:0;border:0;margin:0}ol,ol li,ul,ul li{margin-left:0;padding-left:0}ol,ul{margin-left:2em}body{font-family:Orbitron,sans-serif;background-color:#333}#calculator{width:360px;margin:64px auto 0}#title{padding-top:8px;padding-bottom:8px;margin-bottom:16px;color:#2abcef;text-align:center;text-shadow:1px 1px 1px rgba(0,0,0,.5)}#entrybox{width:336px;height:72px;border-top:2px solid #2abcef;margin:0 auto;background-color:#444;text-align:right}#entry{font-size:36px;color:#f7f7f7}#ans,#entry{margin-right:8px}#history{font-size:9px;color:#8b8b7b}#buttons{width:360px;margin:0 auto}table{border-collapse:collapse}table,td,th{border:12px solid transparent}td{width:90px;height:55px}button{font-family:Orbitron,sans-serif;width:100%;height:100%;border-bottom:#444;color:#f7f7f7;font-size:16px;font-weight:700;background-color:#555;outline:none;cursor:pointer;box-shadow:1px 1px 2px 1px rgba(0,0,0,.2)}button:active{opacity:.7;box-shadow:none;transform:translateY(1px)}button.system{background-color:#2abcef}li.record{width:300px;padding:16px;border-radius:16px;margin-top:16px;background-color:#444;color:#f7f7f7;text-align:right;box-shadow:2px 2px 2px 2px rgba(0,0,0,.2)}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports) {
 
 /*
@@ -1288,19 +1146,19 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/fonts/Orbitron-Regular.ttf";
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/fonts/JosefinSans-Regular.ttf";
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1346,7 +1204,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(95);
+var	fixUrls = __webpack_require__(96);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1659,7 +1517,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports) {
 
 
@@ -1754,4 +1612,4 @@ module.exports = function (css) {
 
 
 /***/ })
-],[74]);
+],[75]);
