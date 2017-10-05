@@ -13,7 +13,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
-        extensions: [ ".js", ".json", ".jsx" ]
+        extensions: [ ".js", ".json", ".jsx" ],
+        symlinks: false
     },
     module: {
         rules: [
