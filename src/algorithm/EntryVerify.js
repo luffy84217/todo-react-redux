@@ -1,3 +1,5 @@
+import app from '../config/app.config';
+
 export default function entryVerify(entry) {
 
     const operations = ['+', '-', '*', '/'];
@@ -15,11 +17,11 @@ export default function entryVerify(entry) {
     if (entry.indexOf('.') !== -1) {
         const arr = entry.split('.')
 
-        return `${arr[0]}.${arr[1].slice(0, 4)}`;
+        return `${arr[0]}.${arr[1].slice(0, app.config.decimalPlaceAllowed)}`;
     }
     // prevent display overflow
-    if (entry.length > 11) {
-        return entry.slice(0, 11);
+    if (entry.length >= app.config.digitsDisplayLimit) {
+        return entry.slice(0, app.config.digitsDisplayLimit);
     }
     // prevent no number displaying from occurring
     if (entry === '') {
