@@ -1,5 +1,6 @@
 import React from 'react';
 import press from '../action/press';
+import app from '../config/app.config';
 
 export default class Board extends React.Component {
     constructor(props) {
@@ -10,37 +11,20 @@ export default class Board extends React.Component {
         this.props.press(entry);
     }
 
-    render() {        
+    render() {
+        const buttons = app.config.keyConfig.map((row, y) =>
+            <tr key={y}>{row.map((button, x) =>
+                <td key={x}>
+                    <button key={button.key} className={button.class} onClick={this.buttonHandler.bind(this, button.action)}>{button.key}</button>
+                </td>
+            )}</tr>
+        );
+
         return (
-            <div id='buttons'>
+            <div id="buttons">
                 <table>
                     <tbody>
-                        <tr>
-                            <td><button className="system" onClick={this.buttonHandler.bind(this, 'ALL_CLEAR')}>AC</button></td>
-                            <td><button className="system" onClick={this.buttonHandler.bind(this, 'DELETE')}>Del</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, '(')}>(</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, ')')}>)</button></td>
-                        </tr><tr>
-                            <td><button onClick={this.buttonHandler.bind(this, 7)}>7</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, 8)}>8</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, 9)}>9</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, '+')}>+</button></td>
-                        </tr><tr>
-                            <td><button onClick={this.buttonHandler.bind(this, 4)}>4</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, 5)}>5</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, 6)}>6</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, '-')}>-</button></td>
-                        </tr><tr>
-                            <td><button onClick={this.buttonHandler.bind(this, 1)}>1</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, 2)}>2</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, 3)}>3</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, '*')}>x</button></td>
-                        </tr><tr>
-                            <td><button onClick={this.buttonHandler.bind(this, '.')}>.</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, 0)}>0</button></td>
-                            <td><button className="system" onClick={this.buttonHandler.bind(this, 'COMPUTE')}>=</button></td>
-                            <td><button onClick={this.buttonHandler.bind(this, '/')}>&divide;</button></td>
-                        </tr>
+                        {buttons}
                     </tbody>
                 </table>
             </div>
