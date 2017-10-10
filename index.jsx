@@ -8,6 +8,10 @@ import reducer from './src/reducers/combinedReducer';
 import press from './src/action/press'
 import './src/style.css';
 
+if (process.env.NODE_ENV !== 'production') {
+    console.info('Looks like we are in development mode!');
+}
+
 const store = createStore(reducer);
 
 getElement('div', 'root')

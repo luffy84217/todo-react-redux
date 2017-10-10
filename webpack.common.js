@@ -53,14 +53,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            // filename: "vendor.js"
-            // (Give the chunk a different name)
-            name: "vendor",
-            // (with more entries, this ensures that no other module
-            //  goes into the vendor chunk)
-            minChunks: Infinity,
-        }),
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             title: 'Calculator - React-Redux Application',
