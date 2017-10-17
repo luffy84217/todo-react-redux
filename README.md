@@ -1,6 +1,6 @@
-# Calculator-React-Redux
+# Todo-React-Redux
 
-This is a todos built by react with Redux.
+This is a todo built by react with Redux.
 
 ## Getting Started
 
