@@ -1,6 +1,6 @@
 # Calculator-React-Redux
 
-This is a calculator built by react with Redux.
+This is a todos built by react with Redux.
 
 ## Getting Started
 
@@ -55,7 +55,7 @@ npm run build
 
 ### Using http-server
 
-http-server module is a simple http server and it is easy to start up.
+`http-server` module is a simple http server and it is easy to start up.
 
 ```
 npm start
@@ -73,4 +73,4 @@ npm start
 
 ## License
 
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

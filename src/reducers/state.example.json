@@ -1,0 +1,16 @@
+{
+    "todos":
+    [
+        {
+            "id": 0,
+            "text": "purchase",
+            "completed": true // false
+        },
+        {
+            "id": 1,
+            "text": "meeting",
+            "completed": false // true
+        }
+    ],
+    "visibilityFilter": "SHOW_ALL" // SHOW_ACTIVE or SHOW_COMPLETED
+}

@@ -3,9 +3,8 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { $, getElement } from './src/utils';
-import App from './src/component/App';
-import reducer from './src/reducers/combinedReducer';
-import press from './src/action/press'
+import TodoApp from './src/container/TodoApp';
+import reducer from './src/reducers/index';
 import './src/style.css';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -17,11 +16,11 @@ const store = createStore(reducer);
 getElement('div', 'root')
     .then(element => {
 
-        $('main').appendChild(element);
+        $('section.todoapp').appendChild(element);
 
         ReactDOM.render(
             <Provider store={store}>
-                <App type="tool" />
+                <TodoApp />
             </Provider>,
             $('#root')
         );

@@ -1,11 +1,11 @@
 {
-  "name": "calculator-react-redux",
+  "name": "todo-react-redux",
   "version": "1.0.0",
-  "description": "This is a calculator built by react with Redux.",
+  "description": "This is a todo built by react with Redux.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luffy84217/calculator-react-redux"
+    "url": "git+https://github.com/luffy84217/todo-react-redux"
   },
   "engines": {
     "node": "6.11.1",
@@ -18,14 +18,14 @@
     "build": "webpack --config webpack.prod.js"
   },
   "keywords": [
-    "calculator",
+    "todo",
     "react",
     "redux",
     "react-redux",
     "webpack"
   ],
   "author": "Fu Chuan Yu",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -34,6 +34,7 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.4",
     "html-webpack-plugin": "^2.30.1",
     "style-loader": "^0.18.2",
@@ -44,6 +45,7 @@
   },
   "dependencies": {
     "http-server": "^0.10.0",
+    "lodash": "^4.17.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",

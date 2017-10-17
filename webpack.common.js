@@ -2,11 +2,12 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
         vendor: [ 'react', 'react-dom', 'redux', 'react-redux' ],
-        main: './index.jsx'
+        main: './index'
     },
     output: {
         filename: '[name].bundle.js',
@@ -19,26 +20,11 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: 'assets/fonts/'
-                }
-            },
-            {
                 test: /\.css$/,
-                use: [ 
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }
-                ]
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             },
             {
                 test: /\.jsx?$/,
@@ -55,8 +41,14 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: 'Calculator - React-Redux Application',
+            title: 'Todo - React-Redux Application',
             template: './src/template.ejs'
-        })
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.min.js',
+            minChunks: Infinity,
+        }),
+        new ExtractTextPlugin("styles.css")
     ]
 };

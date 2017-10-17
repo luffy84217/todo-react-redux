@@ -6,10 +6,10 @@ export function $(selector, el) {
 }
 
 export function $$(selector, el) {
-     if (!el) {
+    if (!el) {
         el = document.body;
     }
-     return el.querySelectorAll(selector);
+    return el.querySelectorAll(selector);
 }
 
 export function getElement(tag, id) {
